@@ -10,7 +10,7 @@ resource "null_resource" "ansible" {
 
   # Avi ansible role installation
   provisioner "local-exec" {
-    command = "sudo -u $USER ansible-galaxy install -f avinetworks.avisdk"
+    command = "su - $USER ; sudo -u $USER ansible-galaxy install -f avinetworks.avisdk"
   }
 
 }
