@@ -29,3 +29,11 @@ resource "vsphere_folder" "folder" {
   type          = "vm"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
+
+resource "vsphere_tag_category" "ansible_group_controller" {
+  name = "ansible_group_controller"
+  cardinality = "SINGLE"
+  associable_types = [
+    "VirtualMachine",
+  ]
+}
