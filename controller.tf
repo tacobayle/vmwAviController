@@ -1,6 +1,6 @@
 resource "vsphere_tag" "ansible_group_controller" {
   name             = "aviController"
-  category_id      = vsphere_tag_category.ansible_group_controller.id
+  category_id      = vsphere_tag_category.ansible_group_avi_controller.id
 }
 
 
