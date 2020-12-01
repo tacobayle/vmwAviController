@@ -1,12 +1,3 @@
-data "vsphere_content_library" "library" {
-  name = var.contentLibrary.name
-}
-
-data "vsphere_content_library_item" "aviController" {
-  name       = "controller-${var.controller.version}.ova"
-  library_id = data.vsphere_content_library.library.id
-  type = "local"
-}
 
 resource "vsphere_virtual_machine" "controller" {
   count            = length(var.controller.mgmt_ips)
@@ -30,7 +21,7 @@ resource "vsphere_virtual_machine" "controller" {
   }
 
   clone {
-    template_uuid = data.vsphere_content_library_item.aviController.id
+    template_uuid = vsphere_content_library_item.aviController.id
   }
 
   vapp {
