@@ -41,3 +41,11 @@ variable "controller" {
     default_gws = ["10.41.132.1", "10.41.132.1", "10.41.132.1"]
   }
 }
+
+variable "ansible" {
+  type = map
+  default = {
+    version = "2.9.12"
+    avisdkVersion = "18.2.9"
+  }
+}
