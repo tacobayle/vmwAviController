@@ -3,6 +3,6 @@ resource "null_resource" "ansible" {
     vsphere_virtual_machine.controller]
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i /opt/ansible/inventory/inventory.vmware.yml main.yml"
+    command = "ansible-playbook -i /opt/ansible/inventory/inventory.vmware.yml ansible/main.yml"
   }
 }
