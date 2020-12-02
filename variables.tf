@@ -35,13 +35,13 @@ variable "controller" {
     memory = 24768
     disk = 128
     version = "20.1.2-9171"
-    floatingIp = "10.41.134.130"
     wait_for_guest_net_timeout = 2
     folder = "NicTfAviControllers"
     networks = ["vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt"]
     mgmt_ips = ["10.41.134.127", "10.41.134.128", "10.41.134.129"]
     mgmt_masks = ["255.255.252.0", "255.255.252.0", "255.255.252.0"]
     default_gws = ["10.41.132.1", "10.41.132.1", "10.41.132.1"]
+    floatingIp = "10.41.134.130"
     dns =  ["10.23.108.1", "10.23.108.2"]
     ntp = ["95.81.173.155", "188.165.236.162"]
     from_email = "avicontroller@avidemo.fr"

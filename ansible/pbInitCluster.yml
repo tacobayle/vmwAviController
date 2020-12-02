@@ -10,7 +10,7 @@
     - name: Set variable avi_credentials
       set_fact:
         avi_credentials: >
-          {'api_version': "{{ controller.version }}",
+          {'api_version': "{{ controller.version.split('-')[0] }}",
            'controller': "{{ controller.mgmt_ips.0 }}",
            'password': "{{ avi_password }}",
            'username': "{{ avi_user }}"}
@@ -96,8 +96,8 @@
         - cluster
 
 
-    - name: sleep for 300 seconds and continue with play - if cluster has been configured
-      wait_for: timeout=300
+    - name: sleep for 240 seconds and continue with play - if cluster has been configured
+      wait_for: timeout=240
       when:
         - controller.mgmt_ips | length == 3
       tags:
