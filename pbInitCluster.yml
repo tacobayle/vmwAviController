@@ -1,0 +1,130 @@
+---
+- hosts: localhost
+  gather_facts: no
+
+  roles:
+    - role: "avinetworks.avisdk"
+
+  tasks:
+
+    - name: Set variable avi_credentials
+      set_fact:
+        avi_credentials: >
+          {'api_version': "{{ controller.version }}",
+           'controller': "{{ controllerPrivateIps.0 }}",
+           'password': "{{ avi_password }}",
+           'username': "{{ avi_user }}"}
+      tags:
+        - creds
+      when:
+        - controller.version is defined
+        - controllerPrivateIps is defined
+        - avi_password is defined
+        - avi_user is defined
+
+    - name: Update user admin password
+      avi_useraccount:
+        controller: "{{ avi_credentials.controller }}"
+        username: "{{ avi_credentials.username }}"
+        password: "{{ avi_credentials.password }}"
+        old_password: 58NFaGDJm(PJH0G
+        api_version: "{{ avi_credentials.api_version }}"
+      ignore_errors: yes
+      tags:
+        - creds
+
+    - name: Get main Cluster Information
+      avi_api_session:
+        avi_credentials: "{{ avi_credentials }}"
+        http_method: get
+        path: cluster
+      register: clusterInfo
+      tags:
+        - cluster
+
+    - name: Configure Cluster object with ClusterIP
+      avi_cluster:
+        avi_credentials: "{{ avi_credentials }}"
+        api_version: "{{ avi_credentials.api_version }}"
+        nodes:
+          - name: "{{ controllerPrivateIps.0 }}"
+            ip:
+              type: V4
+              addr: "{{ controllerPrivateIps.0 }}"
+          - name: "{{ controllerPrivateIps.1 }}"
+            ip:
+              type: V4
+              addr: "{{ controllerPrivateIps.1 }}"
+          - name: "{{ controllerPrivateIps.2 }}"
+            ip:
+              type: V4
+              addr: "{{ controllerPrivateIps.2 }}"
+        name: cluster-0-1
+        uuid: "{{ clusterInfo['obj'].uuid }}"
+        virtual_ip:
+          addr: "{{ controller.floatingIp }}"
+          type: V4
+      when:
+        - controller.count == 3
+        - controller.floatingIp is defined
+      tags:
+        - cluster
+
+    - name: Configure Cluster object without ClusterIP
+      avi_cluster:
+        avi_credentials: "{{ avi_credentials }}"
+        api_version: "{{ avi_credentials.api_version }}"
+        nodes:
+          - name: "{{ controllerPrivateIps.0 }}"
+            ip:
+              type: V4
+              addr: "{{ controllerPrivateIps.0 }}"
+          - name: "{{ controllerPrivateIps.1 }}"
+            ip:
+              type: V4
+              addr: "{{ controllerPrivateIps.1 }}"
+          - name: "{{ controllerPrivateIps.2 }}"
+            ip:
+              type: V4
+              addr: "{{ controllerPrivateIps.2 }}"
+        name: cluster-0-1
+        uuid: "{{ clusterInfo['obj'].uuid }}"
+      when:
+        - controller.count == 3
+        - controller.floatingIp is not defined
+      tags:
+        - cluster
+
+
+    - name: sleep for 300 seconds and continue with play - if cluster has been configured
+      wait_for: timeout=300
+      when:
+        - controller.count == 3
+        - controller.floatingIp is defined
+        - controller.environment == "VMWARE"
+      tags:
+        - cluster
+
+    - name: Wait for the Controller cluster to finish - if cluster has been configured
+      avi_api_session:
+        avi_credentials: "{{ avi_credentials }}"
+        api_version: "{{ avi_credentials.api_version }}"
+        http_method: get
+        timeout: 300
+        path: cluster/status
+      register: statusCluster
+      ignore_errors: yes
+      until:
+        - statusCluster.obj.cluster_state.state == "CLUSTER_UP_HA_ACTIVE"
+        - statusCluster.obj.node_states.0.state == "CLUSTER_ACTIVE"
+        - statusCluster.obj.node_states.1.state == "CLUSTER_ACTIVE"
+        - statusCluster.obj.node_states.2.state == "CLUSTER_ACTIVE"
+      retries: 120
+      delay: 10
+      when:
+        - controller.count == 3
+        - controller.floatingIp is defined
+        - controller.environment == "VMWARE"
+      tags:
+        - cluster
+

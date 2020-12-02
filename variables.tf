@@ -4,6 +4,8 @@
 variable "vsphere_user" {}
 variable "vsphere_password" {}
 variable "vsphere_server" {}
+variable "avi_password" {}
+variable "avi_user" {}
 
 #
 # Other Variables
@@ -39,5 +41,11 @@ variable "controller" {
     mgmt_ips = ["10.41.134.127", "10.41.134.128", "10.41.134.129"]
     mgmt_masks = ["255.255.252.0", "255.255.252.0", "255.255.252.0"]
     default_gws = ["10.41.132.1", "10.41.132.1", "10.41.132.1"]
+    dns =  ["10.23.108.1", "10.23.108.2"]
+    ntp = ["95.81.173.155", "188.165.236.162"]
+    from_email = "avicontroller@avidemo.fr"
+    se_in_provider_context = "false"
+    tenant_access_to_provider_se = "true"
+    tenant_vrf = "false"
   }
 }
