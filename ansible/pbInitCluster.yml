@@ -50,15 +50,15 @@
           - name: "{{ controllerPrivateIps.0 }}"
             ip:
               type: V4
-              addr: "{{ controllerPrivateIps.0 }}"
-          - name: "{{ controllerPrivateIps.1 }}"
+              addr: "{{ controller.mgmt_ips.0 }}"
+          - name: "{{ controller.mgmt_ips.1 }}"
             ip:
               type: V4
-              addr: "{{ controllerPrivateIps.1 }}"
-          - name: "{{ controllerPrivateIps.2 }}"
+              addr: "{{ controller.mgmt_ips.1 }}"
+          - name: "{{ controller.mgmt_ips.2 }}"
             ip:
               type: V4
-              addr: "{{ controllerPrivateIps.2 }}"
+              addr: "{{ controller.mgmt_ips.2 }}"
         name: cluster-0-1
         uuid: "{{ clusterInfo['obj'].uuid }}"
         virtual_ip:
@@ -75,18 +75,18 @@
         avi_credentials: "{{ avi_credentials }}"
         api_version: "{{ avi_credentials.api_version }}"
         nodes:
-          - name: "{{ controllerPrivateIps.0 }}"
+          - name: "{{ controller.mgmt_ips.0 }}"
             ip:
               type: V4
-              addr: "{{ controllerPrivateIps.0 }}"
-          - name: "{{ controllerPrivateIps.1 }}"
+              addr: "{{ controller.mgmt_ips.0 }}"
+          - name: "{{ controller.mgmt_ips.1 }}"
             ip:
               type: V4
-              addr: "{{ controllerPrivateIps.1 }}"
-          - name: "{{ controllerPrivateIps.2 }}"
+              addr: "{{ controller.mgmt_ips.1 }}"
+          - name: "{{ controller.mgmt_ips.2 }}"
             ip:
               type: V4
-              addr: "{{ controllerPrivateIps.2 }}"
+              addr: "{{ controller.mgmt_ips.2 }}"
         name: cluster-0-1
         uuid: "{{ clusterInfo['obj'].uuid }}"
       when:
@@ -120,6 +120,6 @@
       retries: 120
       delay: 10
       when:
-        - controllerPrivateIps | length == 3
+        - controller.mgmt_ips | length == 3
       tags:
         - cluster
