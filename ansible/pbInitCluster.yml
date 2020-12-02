@@ -47,7 +47,7 @@
         avi_credentials: "{{ avi_credentials }}"
         api_version: "{{ avi_credentials.api_version }}"
         nodes:
-          - name: "{{ controllerPrivateIps.0 }}"
+          - name: "{{ controller.mgmt_ips.0 }}"
             ip:
               type: V4
               addr: "{{ controller.mgmt_ips.0 }}"
