@@ -11,14 +11,14 @@
       set_fact:
         avi_credentials: >
           {'api_version': "{{ controller.version }}",
-           'controller': "{{ controllerPrivateIps.0 }}",
+           'controller': "{{ controller.mgmt_ips.0 }}",
            'password': "{{ avi_password }}",
            'username': "{{ avi_user }}"}
       tags:
         - creds
       when:
         - controller.version is defined
-        - controllerPrivateIps is defined
+        - controller.mgmt_ips is defined
         - avi_password is defined
         - avi_user is defined
 
@@ -65,7 +65,7 @@
           addr: "{{ controller.floatingIp }}"
           type: V4
       when:
-        - controllerPrivateIps | length == 3
+        - controller.mgmt_ips | length == 3
         - controller.floatingIp is defined
       tags:
         - cluster
@@ -90,7 +90,7 @@
         name: cluster-0-1
         uuid: "{{ clusterInfo['obj'].uuid }}"
       when:
-        - controller.count == 3
+        - controller.mgmt_ips | length == 3
         - controller.floatingIp is not defined
       tags:
         - cluster
@@ -99,9 +99,7 @@
     - name: sleep for 300 seconds and continue with play - if cluster has been configured
       wait_for: timeout=300
       when:
-        - controller.count == 3
-        - controller.floatingIp is defined
-        - controller.environment == "VMWARE"
+        - controller.mgmt_ips | length == 3
       tags:
         - cluster
 
@@ -122,9 +120,6 @@
       retries: 120
       delay: 10
       when:
-        - controller.count == 3
-        - controller.floatingIp is defined
-        - controller.environment == "VMWARE"
+        - controllerPrivateIps | length == 3
       tags:
         - cluster
-
