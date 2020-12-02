@@ -65,7 +65,7 @@
           addr: "{{ controller.floatingIp }}"
           type: V4
       when:
-        - controller.count == 3
+        - controllerPrivateIps | length == 3
         - controller.floatingIp is defined
       tags:
         - cluster
