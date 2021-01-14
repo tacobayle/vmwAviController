@@ -28,6 +28,6 @@ data "template_file" "backend_lsc_userdata" {
 }
 
 resource "avi_cluster" "res_cluster" {
-  nodes = [join(",", data.template_file.*)]
   name = "cluster-0-1"
+  nodes = [join(",", data.template_file.backend_lsc_userdata.*)]
 }
