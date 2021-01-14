@@ -18,7 +18,7 @@ data "avi_cluster" "data_cluster" {
   name = "cluster-0-1"
 }
 
-data "template_file" "backend_lsc_userdata" {
+data "template_file" "nodes" {
   count = length(var.controller.mgmt_ips)
   template = file("${path.module}/template/nodes.tmpl")
   vars = {
@@ -27,7 +27,7 @@ data "template_file" "backend_lsc_userdata" {
   }
 }
 
-resource "avi_cluster" "res_cluster" {
-  name = "cluster-0-1"
-  nodes = [join(",", data.template_file.backend_lsc_userdata.*)]
-}
+//resource "avi_cluster" "res_cluster" {
+//  name = "cluster-0-1"
+//  nodes = [join(",", data.template_file.nodes.*)]
+//}
