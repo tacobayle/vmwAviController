@@ -25,7 +25,7 @@ variable "contentLibrary" {
   default = {
     name = "Avi Content Library"
     description = "Avi Content Library"
-    file = "/home/ubuntu/controller-20.1.3-9085.ova"
+    file = "/home/ubuntu/controller-20.1.3-9085.ova" # don't change the file name - it is used to retrieve the Avi version
   }
 }
 
@@ -34,7 +34,6 @@ variable "controller" {
     cpu = 8
     memory = 24768
     disk = 128
-    version = "20.1.2-9171"
     wait_for_guest_net_timeout = 2
     folder = "NicTfAviControllers"
     networks = ["vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt"]

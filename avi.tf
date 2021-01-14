@@ -23,7 +23,7 @@ data "template_file" "nodes" {
   template = file("${path.module}/template/nodes.tmpl")
   vars = {
     name     = element(var.controller.mgmt_ips, count.index)
-    addr       = element(var.controller.mgmt_ips, count.index)
+    addr     = element(var.controller.mgmt_ips, count.index)
   }
 }
 
