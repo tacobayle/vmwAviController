@@ -40,12 +40,3 @@ resource "vsphere_virtual_machine" "controller" {
    }
  }
 }
-
-resource "null_resource" "wait_https_controller" {
-  depends_on = [vsphere_virtual_machine.controller]
-  count            = length(var.controller.mgmt_ips)
-
-  provisioner "local-exec" {
-    command = "until $(curl --output /dev/null --silent --head -k https://${element(var.controller.mgmt_ips, count.index)}); do echo 'Waiting for Avi Controllers to be ready'; sleep 10 ; done"
-  }
-}
