@@ -36,11 +36,10 @@ resource "avi_cluster" "res_cluster" {
     ip {
       addr = "10.41.134.127"
       type ="v4"
-      }
     }
   }
-  #nodes = [join(",", data.template_file.nodes.*.rendered)]
 }
+  #nodes = [join(",", data.template_file.nodes.*.rendered)]
 
 
 //resource "avi_cluster" "res_cluster" {
