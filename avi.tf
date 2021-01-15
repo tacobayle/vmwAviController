@@ -28,7 +28,7 @@ data "template_file" "nodes" {
   }
 }
 
-//resource "avi_cluster" "res_cluster" {
-//  name = "cluster-0-1"
-//  nodes = [join(",", data.template_file.nodes.*)]
-//}
+resource "avi_cluster" "res_cluster" {
+  name = "cluster-0-1"
+  nodes = [join(",", data.template_file.nodes.*.rendered)]
+}
