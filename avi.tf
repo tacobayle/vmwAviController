@@ -35,7 +35,7 @@ resource "avi_cluster" "res_cluster" {
       ip = ip
     }]
     content {
-      name = nodes.value
+      name = "${nodes.value}"
       ip {
         addr = nodes.value
         type ="v4"
