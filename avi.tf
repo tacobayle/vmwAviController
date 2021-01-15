@@ -32,19 +32,10 @@ resource "avi_cluster" "res_cluster" {
   depends_on = [null_resource.wait_https_controller, avi_useraccount.update_admin_password]
   name = "cluster-0-1"
   nodes {
-    {
-      name = "10.41.134.127"
-      ip {
-        addr = "10.41.134.127"
-        type ="v4"
-      }
-    },
-    {
-      name = "10.41.134.128"
-      ip {
-        addr = "10.41.134.128"
-        type ="v4"
-      }
+    name = "10.41.134.127"
+    ip {
+      addr = "10.41.134.127"
+      type ="v4"
     }
   }
 }
