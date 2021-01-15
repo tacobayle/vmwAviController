@@ -30,17 +30,41 @@ data "template_file" "nodes" {
 
 resource "avi_cluster" "res_cluster" {
   name = "cluster-0-1"
-  dynamic nodes {
-    for_each = [for ip in var.controller.mgmt_ips:{
-      ip = ip
-    }]
-    content {
-      name = "${nodes.value}"
+  nodes {
+    name = "10.41.134.127"
       ip {
-        addr = nodes.value
+        addr = "10.41.134.127"
         type ="v4"
-      }
+      },
+      name = "10.41.134.128"
+      ip {
+        addr = "10.41.134.128"
+        type ="v4"
+      },
+      name = "10.41.134.129"
+      ip {
+        addr = "10.41.134.129"
+        type ="v4"
+      },
     }
   }
   #nodes = [join(",", data.template_file.nodes.*.rendered)]
 }
+
+
+//resource "avi_cluster" "res_cluster" {
+//  name = "cluster-0-1"
+//  dynamic nodes {
+//    for_each = [for ip in var.controller.mgmt_ips:{
+//      ip = ip
+//    }]
+//    content {
+//      name = nodes.value
+//      ip {
+//        addr = nodes.value
+//        type ="v4"
+//      }
+//    }
+//  }
+//  #nodes = [join(",", data.template_file.nodes.*.rendered)]
+//}
