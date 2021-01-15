@@ -30,5 +30,17 @@ data "template_file" "nodes" {
 
 resource "avi_cluster" "res_cluster" {
   name = "cluster-0-1"
-  nodes = [join(",", data.template_file.nodes.*.rendered)]
+  dynamic nodes {
+    for_each = [for ip in var.controller.mgmt_ips:{
+      ip = ip
+    }]
+    content {
+      name = nodes.value
+      ip {
+        addr = nodes.value
+        type ="v4"
+      }
+    }
+  }
+  #nodes = [join(",", data.template_file.nodes.*.rendered)]
 }
