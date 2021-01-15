@@ -38,6 +38,20 @@ resource "avi_cluster" "res_cluster" {
       type ="v4"
     }
   }
+  nodes {
+    name = "10.41.134.128"
+    ip {
+      addr = "10.41.134.128"
+      type ="v4"
+    }
+  }
+  nodes {
+    name = "10.41.134.129"
+    ip {
+      addr = "10.41.134.129"
+      type ="v4"
+    }
+  }
 }
   #nodes = [join(",", data.template_file.nodes.*.rendered)]
 
