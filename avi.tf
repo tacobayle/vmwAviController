@@ -15,6 +15,7 @@ resource "avi_useraccount" "update_admin_password" {
 }
 
 data "avi_cluster" "data_cluster" {
+  depends_on = [null_resource.wait_https_controller]
   name = "cluster-0-1"
 }
 
