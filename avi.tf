@@ -15,7 +15,7 @@ resource "avi_useraccount" "update_admin_password" {
 }
 
 data "avi_cluster" "data_cluster" {
-  depends_on = [null_resource.wait_https_controller]
+  depends_on = [null_resource.wait_https_controller, avi_useraccount.update_admin_password]
   name = "cluster-0-1"
 }
 
@@ -29,6 +29,7 @@ data "template_file" "nodes" {
 }
 
 resource "avi_cluster" "res_cluster" {
+  depends_on = [null_resource.wait_https_controller, avi_useraccount.update_admin_password]
   name = "cluster-0-1"
   nodes {
     name = "10.41.134.127"
