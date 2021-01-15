@@ -1,5 +1,5 @@
 # Outputs for Terraform
 
 output "test" {
-  value = [join(",", data.template_file.nodes.*)]
+  value = [join(",", data.template_file.nodes.*.rendered)]
 }
