@@ -36,16 +36,6 @@ resource "avi_cluster" "res_cluster" {
     ip {
       addr = "10.41.134.127"
       type ="v4"
-    },
-    name = "10.41.134.128"
-    ip {
-      addr = "10.41.134.128"
-      type ="v4"
-    },
-    name = "10.41.134.129"
-    ip {
-      addr = "10.41.134.129"
-      type ="v4"
     }
   }
 }
