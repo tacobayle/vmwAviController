@@ -10,5 +10,5 @@ provider "avi" {
   avi_password   = var.avi_password
   avi_controller = var.controller.mgmt_ips[0]
   avi_tenant     = "admin"
-  avi_version    = split("-", basename(var.contentLibrary.files))[1]
+  avi_version    = split("-", basename(var.contentLibrary.file))[1]
 }
