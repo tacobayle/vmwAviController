@@ -62,11 +62,11 @@
         name: cluster-0-1
         uuid: "{{ clusterInfo['obj'].uuid }}"
         virtual_ip:
-          addr: "{{ controller.floatingIp }}"
+          addr: "{{ controller.floating_ip }}"
           type: V4
       when:
         - controller.mgmt_ips | length == 3
-        - controller.floatingIp is defined
+        - controller.floating_ip is defined
       tags:
         - cluster
 
@@ -91,7 +91,7 @@
         uuid: "{{ clusterInfo['obj'].uuid }}"
       when:
         - controller.mgmt_ips | length == 3
-        - controller.floatingIp is not defined
+        - controller.floating_ip is not defined
       tags:
         - cluster
 
