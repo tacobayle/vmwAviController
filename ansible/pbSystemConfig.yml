@@ -21,14 +21,14 @@
 
     - name: Define ntp_servers
       set_fact:
-        ntp_servers: "{{ controller.ntp | default([]) + [{ 'server': {'type': 'V4', 'addr': item}}] }}"
+        ntp_servers: "{{ ntp_servers | default([]) + [{ 'server': {'type': 'V4', 'addr': item}}] }}"
       loop: "{{ controller.ntp }}"
       when:
         - controller.ntp is defined
 
     - name: Define dns_servers
       set_fact:
-        server_list: "{{ controller.dns | default([]) + [{'type': 'V4', 'addr': item}] }}"
+        server_list: "{{ server_list | default([]) + [{'type': 'V4', 'addr': item}] }}"
       loop: "{{ controller.dns }}"
       when:
         - controller.dns is defined
