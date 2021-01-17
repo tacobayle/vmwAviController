@@ -5,6 +5,7 @@ variable "vsphere_user" {}
 variable "vsphere_password" {}
 variable "vsphere_server" {}
 variable "avi_password" {}
+variable "avi_backup_passphrase" {}
 variable "avi_user" {}
 
 #
