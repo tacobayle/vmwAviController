@@ -34,7 +34,7 @@ variable "controller" {
     cpu = 8
     memory = 24768
     disk = 128
-    wait_for_guest_net_timeout = 2
+    wait_for_guest_net_timeout = 4
     folder = "NicTfAviControllers"
     networks = ["vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt"]
     mgmt_ips = ["10.41.134.127", "10.41.134.128", "10.41.134.129"]

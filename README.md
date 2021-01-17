@@ -1,7 +1,7 @@
 # vmwAviController
 
-## Goals
-Terraform / Ansible | Deploy Avi Controller Cluster and configure it
+## Goal
+Terraform / Ansible | Deploy Avi Controller Cluster and configure it.
 
 
 ## Prerequisites:
@@ -13,11 +13,11 @@ ansible-galaxy install -f avinetworks.avisdk
 ```  
 - environment variables:
 ```
-TF_VAR_vsphere_user=******
-TF_VAR_vsphere_server=******
-TF_VAR_vsphere_password=******
-TF_VAR_avi_password=******
-TF_VAR_avi_user=admin
+export TF_VAR_vsphere_user=******
+export TF_VAR_vsphere_server=******
+export TF_VAR_vsphere_password=******
+export TF_VAR_avi_password=******
+export TF_VAR_avi_user=admin
 ```
 
 ## Environment:
@@ -53,9 +53,12 @@ ansible 2.9.12
 
 ## Use the terraform plan to:
 - Create a new folder within v-center
-- Spin up n Avi Controller in the new folder - the count is defined by the amount of fixed IP provided in var.controller.mgmt_ips
+- Spin up n Avi Controller in the new folder - the count is defined by the amount of fixed IP defined in var.controller.mgmt_ips
 - Wait for the https to be ready
-- Make the cluster config through Ansible
+- Bootstrap the Avi controller - Ansible  
+- Make the Avi controller cluster config - Ansible (floating IP is defined if var.controller.floating_ip has been defined)
+- Configure Avi Passphrase - Ansible
+- Configure System config - Ansible
 
 ## Run the terraform:
 ```
