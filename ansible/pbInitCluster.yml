@@ -17,7 +17,7 @@
       tags:
         - creds
       when:
-        - controller.version is defined
+        - avi_version is defined
         - controller.mgmt_ips is defined
         - avi_password is defined
         - avi_user is defined
@@ -94,7 +94,6 @@
         - controller.floatingIp is not defined
       tags:
         - cluster
-
 
     - name: sleep for 300 seconds and continue with play - if cluster has been configured
       wait_for: timeout=300

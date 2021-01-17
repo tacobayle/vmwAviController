@@ -3,7 +3,6 @@
   connection: local
   gather_facts: no
 
-
   roles:
     - role: "avinetworks.avisdk"
 
