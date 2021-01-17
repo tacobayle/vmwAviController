@@ -25,7 +25,7 @@ variable "contentLibrary" {
   default = {
     name = "Avi Content Library"
     description = "Avi Content Library"
-    file = "/home/ubuntu/controller-20.1.3-9085.ova" # don't change the file name - it is used to retrieve the Avi version
+    file = "/home/ubuntu/controller-20.1.3-9085.ova" # don't change the file name - it is used to retrieve the Avi version automatically
   }
 }
 
