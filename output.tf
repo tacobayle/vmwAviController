@@ -1,5 +1,5 @@
 # Outputs for Terraform
 
-//output "test" {
-//  value = [join(",", data.template_file.nodes.*.rendered)]
-//}
+output "controllers_ip" {
+  value = var.controller.mgmt_ips
+}
