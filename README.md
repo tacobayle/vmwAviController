@@ -56,11 +56,11 @@ ansible 2.9.12
 - Spin up n Avi Controller in the new folder - the count is defined by the amount of fixed IP defined in var.controller.mgmt_ips
 - Wait for the https to be ready
 - Bootstrap the Avi controller - Ansible  
-- Make the Avi controller cluster config - Ansible (floating IP is defined if var.controller.floating_ip has been defined)
+- Make the Avi controller cluster config - Ansible - floating IP will be configured if var.controller.floating_ip has been defined
 - Configure Avi Passphrase - Ansible
 - Configure System config - Ansible
 
-## Run the terraform:
+## Run TF Plan:
 ```
 cd ~ ; git clone https://github.com/tacobayle/vmwAviController ; cd aviVmw ; terraform init ;
 ```
