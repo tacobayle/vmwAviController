@@ -1,8 +1,3 @@
-resource "vsphere_tag" "ansible_group_controller" {
-  name             = "aviController"
-  category_id      = vsphere_tag_category.ansible_group_avi_controller.id
-}
-
 resource "vsphere_virtual_machine" "controller" {
   count            = length(var.controller.mgmt_ips)
   name             = "controller-${count.index}"
@@ -27,10 +22,6 @@ resource "vsphere_virtual_machine" "controller" {
   clone {
     template_uuid = vsphere_content_library_item.aviController.id
   }
-
-  tags = [
-    vsphere_tag.ansible_group_controller.id,
-  ]
 
   vapp {
     properties = {
