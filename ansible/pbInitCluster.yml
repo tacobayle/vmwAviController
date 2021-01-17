@@ -10,7 +10,7 @@
     - name: Set variable avi_credentials
       set_fact:
         avi_credentials: >
-          {'api_version': "{{ controller.version.split('-')[0] }}",
+          {'api_version': "{{ avi_version }}",
            'controller': "{{ controller.mgmt_ips.0 }}",
            'password': "{{ avi_password }}",
            'username': "{{ avi_user }}"}

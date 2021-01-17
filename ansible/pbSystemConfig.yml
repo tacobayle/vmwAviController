@@ -20,39 +20,39 @@
       tags:
         - system
 
-    - name: Define ntp_servers
-      set_fact:
-        ntp_servers: "{{ ntp_servers | default([]) + [{ 'server': {'type': 'V4', 'addr': item}}] }}"
-      loop: "{{ controller.ntp }}"
-      when:
-        - controller.dns is defined
-
-    - name: Define dns_servers
-      set_fact:
-        server_list: "{{ server_list | default([]) + [{'type': 'V4', 'addr': item}] }}"
-      loop: "{{ controller.dns }}"
-      when:
-        - controller.dns is defined
+#    - name: Define ntp_servers
+#      set_fact:
+#        ntp_servers: "{{ ntp_servers | default([]) + [{ 'server': {'type': 'V4', 'addr': item}}] }}"
+#      loop: "{{ controller.ntp }}"
+#      when:
+#        - controller.dns is defined
+#
+#    - name: Define dns_servers
+#      set_fact:
+#        server_list: "{{ server_list | default([]) + [{'type': 'V4', 'addr': item}] }}"
+#      loop: "{{ controller.dns }}"
+#      when:
+#        - controller.dns is defined
 
     - name: Define avi_systemconfiguration
       set_fact:
         avi_systemconfiguration:
           global_tenant_config:
-            se_in_provider_context: "{{ controller.se_in_provider_context | default('false') }}"
+            se_in_provider_context: "{{ controller.se_in_provider_context | default('true') }}"
             tenant_access_to_provider_se: "{{ controller.tenant_access_to_provider_se | default('true') }}"
             tenant_vrf: "{{ controller.tenant_vrf | default('false') }}"
           welcome_workflow_complete: true
           ntp_configuration:
-            ntp_servers: "{{ ntp_servers }}"
+            ntp_servers: "{{ controller.ntp }}"
           dns_configuration:
             search_domain: ''
-            server_list: "{{ server_list }}"
+            server_list: "{{ controller.dns }}"
           email_configuration:
             from_email: "{{ controller.email_configuration | default('test@avicontroller.net') }}"
             smtp_type: SMTP_LOCAL_HOST
       when:
-        - ntp_servers is defined
-        - server_list is defined
+        - controller.ntp is defined
+        - controller.dns is defined
 
     - name: Configure Avi System parameters
       avi_systemconfiguration:
