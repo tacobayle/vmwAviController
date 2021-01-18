@@ -109,13 +109,13 @@
         http_method: get
         timeout: 300
         path: cluster/status
-      register: statusCluster
+      register: cluster_status
       ignore_errors: yes
       until:
-        - statusCluster.obj.cluster_state.state == "CLUSTER_UP_HA_ACTIVE"
-        - statusCluster.obj.node_states.0.state == "CLUSTER_ACTIVE"
-        - statusCluster.obj.node_states.1.state == "CLUSTER_ACTIVE"
-        - statusCluster.obj.node_states.2.state == "CLUSTER_ACTIVE"
+        - cluster_status.obj.cluster_state.state == "CLUSTER_UP_HA_ACTIVE"
+        - cluster_status.obj.node_states.0.state == "CLUSTER_ACTIVE"
+        - cluster_status.obj.node_states.1.state == "CLUSTER_ACTIVE"
+        - cluster_status.obj.node_states.2.state == "CLUSTER_ACTIVE"
       retries: 120
       delay: 10
       when:
