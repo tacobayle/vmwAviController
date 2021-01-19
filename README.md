@@ -10,7 +10,7 @@ Terraform / Ansible | Deploy Avi Controller Cluster and configure it.
 - Avi Ansible role installed
 ```
 ansible-galaxy install -f avinetworks.avisdk
-```  
+```
 - environment variables:
 ```
 export TF_VAR_vsphere_user=******
@@ -18,6 +18,7 @@ export TF_VAR_vsphere_server=******
 export TF_VAR_vsphere_password=******
 export TF_VAR_avi_password=******
 export TF_VAR_avi_user=admin
+export TF_VAR_avi_backup_passphrase=******
 ```
 
 ## Environment:
