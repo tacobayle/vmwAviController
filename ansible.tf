@@ -11,6 +11,6 @@ resource "null_resource" "ansible" {
   depends_on = [null_resource.wait_https_controller]
 
   provisioner "local-exec" {
-    command = "ansible-playbook ansible/main.yml --extra-vars '{\"controller\": ${jsonencode(var.controller)}, \"avi_user\": ${jsonencode(var.avi_user)}, \"avi_password\": ${jsonencode(var.avi_password)}, \"avi_version\": ${split("-", basename(var.contentLibrary.file))[1]}}'"
+    command = "ansible-playbook ansible/main.yml --extra-vars '{\"avi_backup_passphrase\": ${jsonencode(var.avi_backup_passphrase)}, \"controller\": ${jsonencode(var.controller)}, \"avi_user\": ${jsonencode(var.avi_user)}, \"avi_password\": ${jsonencode(var.avi_password)}, \"avi_version\": ${split("-", basename(var.contentLibrary.file))[1]}}'"
   }
 }
