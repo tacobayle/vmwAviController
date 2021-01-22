@@ -13,14 +13,13 @@
           {'api_version': "{{ avi_version }}",
            'controller': "{{ controller.mgmt_ips.0 }}",
            'password': "{{ avi_password }}",
-           'username': "{{ avi_user }}"}
+           'username': "admin"}
       tags:
         - creds
       when:
         - avi_version is defined
         - controller.mgmt_ips is defined
         - avi_password is defined
-        - avi_user is defined
 
     - name: Update user admin password
       avi_useraccount:
