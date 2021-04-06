@@ -95,7 +95,7 @@
         - cluster
 
     - name: sleep for 360 seconds and continue with play - if cluster has been configured
-      wait_for: timeout=360
+      wait_for: timeout=480
       when:
         - controller.mgmt_ips | length == 3
       tags:
