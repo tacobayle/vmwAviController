@@ -42,6 +42,11 @@ ansible 2.9.12
   python version = 2.7.17 (default, Sep 30 2020, 13:38:04) [GCC 7.5.0]
 ```
 
+### Avi Version
+```
+controller-20.1.4-9087.ova
+```
+
 ### Ansible Avi Role
 ```
 - avinetworks.avisdk, 20.1.2-beta
