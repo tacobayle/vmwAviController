@@ -65,10 +65,16 @@ controller-20.1.4-9087.ova
 - Configure System config - Ansible
 
 ## Run TF Plan:
+- Git clone the TF plan
 ```
 cd ~ ; git clone https://github.com/tacobayle/vmwAviController ; cd aviVmw ; terraform init ;
 ```
-Change the variables.tf according to your environment
+- Change the variables.tf according to your environment
+- Build the plan
 ```
 terraform apply -auto-approve
+```
+- Destroy the plan
+```
+terraform destroy -auto-approve
 ```

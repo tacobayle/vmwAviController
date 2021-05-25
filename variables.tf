@@ -34,10 +34,10 @@ variable "controller" {
     disk = 128
     wait_for_guest_net_timeout = 4
     folder = "NicWorkshop"
-    mgmt_ips = ["10.41.134.127", "10.41.134.128", "10.41.134.129"]
+    mgmt_ips = ["10.41.134.127", "10.41.134.128", "10.41.134.129"] # if dhcp use the following instead: ["", "", ""]
     networks = ["vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt", "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt"]
-    mgmt_masks = ["255.255.252.0", "255.255.252.0", "255.255.252.0"]
-    default_gws = ["10.41.132.1", "10.41.132.1", "10.41.132.1"]
+    mgmt_masks = ["255.255.252.0", "255.255.252.0", "255.255.252.0"] # if dhcp use the following instead: ["", "", ""]
+    default_gws = ["10.41.132.1", "10.41.132.1", "10.41.132.1"] # if dhcp use the following instead: ["", "", ""]
     floating_ip = "10.41.134.130"
     dns = ["10.23.108.1", "10.23.108.2"]
     ntp = ["95.81.173.155", "188.165.236.162"]
