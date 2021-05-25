@@ -94,13 +94,6 @@
       tags:
         - cluster
 
-    - name: sleep for 480 seconds and continue with play - if cluster has been configured
-      wait_for: timeout=480
-      when:
-        - controller.mgmt_ips | length == 3
-      tags:
-        - cluster
-
     - name: "Wait for Controller to be up..."
       uri:
         url: '{{ "https://" + controller.mgmt_ips.0 + "/api/cluster/runtime" }}'
