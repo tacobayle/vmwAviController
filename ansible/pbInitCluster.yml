@@ -22,7 +22,7 @@
         - avi_password is defined
 
     - name: Update user admin password
-      avi_useraccount:
+      community.network.avi_useraccount:
         controller: "{{ avi_credentials.controller }}"
         username: "{{ avi_credentials.username }}"
         password: "{{ avi_credentials.password }}"
@@ -33,7 +33,7 @@
         - creds
 
     - name: Get main Cluster Information
-      avi_api_session:
+      community.network.avi_api_session:
         avi_credentials: "{{ avi_credentials }}"
         http_method: get
         path: cluster
@@ -42,7 +42,7 @@
         - cluster
 
     - name: Configure Cluster object with ClusterIP
-      avi_cluster:
+      community.network.avi_cluster:
         avi_credentials: "{{ avi_credentials }}"
         api_version: "{{ avi_credentials.api_version }}"
         nodes:
@@ -70,7 +70,7 @@
         - cluster
 
     - name: Configure Cluster object without ClusterIP
-      avi_cluster:
+      community.network.avi_cluster:
         avi_credentials: "{{ avi_credentials }}"
         api_version: "{{ avi_credentials.api_version }}"
         nodes:
@@ -108,7 +108,7 @@
         - cluster
 
     - name: Wait for the Controller cluster to finish - if cluster has been configured
-      avi_api_session:
+      community.network.avi_api_session:
         avi_credentials: "{{ avi_credentials }}"
         api_version: "{{ avi_credentials.api_version }}"
         http_method: get

@@ -67,7 +67,7 @@ controller-20.1.4-9087.ova
 ## Run TF Plan:
 - Git clone the TF plan
 ```
-cd ~ ; git clone https://github.com/tacobayle/vmwAviController ; cd aviVmw ; terraform init ;
+cd ~ ; git clone https://github.com/tacobayle/vmwAviController ; cd vmwAviController ; terraform init ;
 ```
 - Change the variables.tf according to your environment
 - Build the plan
