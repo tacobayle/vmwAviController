@@ -23,31 +23,47 @@ export TF_VAR_avi_backup_passphrase=******
 Terraform Plan has/have been tested against:
 
 ### terraform
-```
-Terraform v0.14.8
+
+https://learn.hashicorp.com/tutorials/terraform/install-cli
+
+```shell
+Terraform v1.0.6
+on linux_amd64
 + provider registry.terraform.io/hashicorp/null v3.1.0
++ provider registry.terraform.io/hashicorp/template v2.2.0
 + provider registry.terraform.io/hashicorp/vsphere v2.0.2
 ```
 
 ### Ansible
+
+```shell
+sudo apt update
+sudo apt install -y python3-pip
+pip3 install --upgrade pip
+pip3 install ansible==2.10.7
 ```
-ansible [core 2.11.3]
-  config file = /etc/ansible/ansible.cfg
-  configured module search path = [u'/home/ubuntu/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
-  ansible python module location = /home/ubuntu/.local/lib/python2.7/site-packages/ansible
-  ansible collection location = /home/ubuntu/.ansible/collections:/usr/share/ansible/collections
+
+```shell
+ansible 2.10.13
+  config file = None
+  configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/ubuntu/.local/lib/python3.8/site-packages/ansible
   executable location = /home/ubuntu/.local/bin/ansible
-  python version = 2.7.17 (default, Feb 27 2021, 15:10:58) [GCC 7.5.0]
-  jinja version = 2.11.2
-  libyaml = False
+  python version = 3.8.10 (default, Jun  2 2021, 10:49:15) [GCC 9.4.0]
 ```
 
 ### Avi Version
+
 ```
 controller-21.1.1-9045.ova
 ```
 
 ### Avi python SDK
+
+```shell
+pip3 install avisdk==21.1.1
+```
+
 ```shell
 ubuntu@nic-jump-sofia:~/vmwAviController$ pip list | grep avi
 avisdk                             21.1.1
@@ -55,6 +71,11 @@ ubuntu@nic-jump-sofia:~/vmwAviController$
 ```
 
 ### Ansible Avi Role
+
+```shell
+ansible-galaxy install -f avinetworks.avisdk
+```
+
 ```shell
 ubuntu@nic-jump-sofia:~/vmwAviController$ ansible-galaxy role list
 # /home/ubuntu/.ansible/roles
@@ -70,21 +91,27 @@ ubuntu@nic-jump-sofia:~/vmwAviController$
 - Spin up n Avi Controller in the new folder - the count is defined by the amount of fixed IP defined in var.controller.mgmt_ips
 - Wait for the https to be ready
 - Bootstrap the Avi controller via Ansible  
-- Make the Avi controller cluster config - Ansible - floating IP will be configured if var.controller.floating_ip has been defined
+- Make the Avi controller cluster config via Ansible - floating IP will be configured if var.controller.floating_ip has been defined
 - Configure Avi Passphrase via Ansible
 - Configure System config via Ansible
 
 ## Run TF Plan:
 - Git clone the TF plan
+
 ```shell
 cd ~ ; git clone https://github.com/tacobayle/vmwAviController ; cd vmwAviController ; terraform init ;
 ```
+
 - Change the variables.tf according to your environment
+  
 - Build the plan
+
 ```shell
 terraform apply -auto-approve
 ```
+
 - Destroy the plan
+
 ```shell
 terraform destroy -auto-approve
 ```
